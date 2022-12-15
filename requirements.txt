@@ -1,1 +1,4 @@
-# Your requirements go here
+cinemagoer==2022.12.4
+greenlet==2.0.1
+lxml==4.9.2
+SQLAlchemy==1.4.45

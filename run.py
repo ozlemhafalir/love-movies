@@ -1,3 +1,8 @@
-# Your code goes here.
-# You can delete these comments, but do not change the name of this file
-# Write your code to expect a terminal of 80 characters wide and 24 rows high
+from imdb import Cinemagoer
+
+
+ia = Cinemagoer()
+
+results = ia.search_movie("harry potter")
+for result in results:
+    print(result.data["title"])
