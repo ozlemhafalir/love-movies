@@ -11,31 +11,30 @@ ia = Cinemagoer()
 
 class MovieBasicInfo:
     """Class definition for movie"""
-
     def __init__(self, movie):
         self.title = movie.data["title"]
         self.year = movie.data["year"]
 
 
-def get_random_movies(movies, count=20):
+def get_random_movies(count=20):
     """
-    From a given list of movies, returns a random list.
+    Returns a random list of movies from top 250 IMDB movies.
     Parameters
-    list: Source list
     count: Number of random movies to return, default 20.
     """
+    movies = ia.get_top250_movies()
     random_indexes = random.sample(range(0, len(movies)), count)
     return [movies[index] for index in random_indexes]
 
 
-def get_does_user_like_movie(movie):
+def does_user_like_movie(movie):
     """
     Helper function to ask if user likes the movie,
-    parse and return bool value.
+    parse the answer and return bool value.
     """
     movie_basic_info = MovieBasicInfo(movie)
     answer = input(f"> [{movie_basic_info.year}] {movie_basic_info.title} \n")
-    while answer != "y" and answer != "n":
+    while answer not in ["y", "n"]:
         answer = input(
             "Please answer with y or n. Do you like: "
             f"[{movie_basic_info.year}] {movie_basic_info.title} \n"
@@ -47,6 +46,7 @@ def get_genres_of_movie(movie):
     """
     Helper function to get genres of movie,
     by using Cinemagoer's get_movie function
+    Returns a list of genre string
     """
     movie_info = ia.get_movie(movie.movieID)
     genres = movie_info["genres"]
@@ -82,6 +82,22 @@ Here are some suggestions for you:
         print(f"[{movie_basic_info.year}] {movie_basic_info.title}")
 
 
+def get_liked_genres_with_movies(movies):
+    """
+    For each movie, ask users if they like the move,
+    if yes, add genres to genres dictionary
+    """
+    liked_genres = {}
+    for movie in movies:
+        if does_user_like_movie(movie):
+            print("* adding genres to your list, please wait...")
+            genres = get_genres_of_movie(movie)
+            for genre in genres:
+                liked_genres[genre] = liked_genres.get(genre, 0) + 1
+        print("")
+    return liked_genres
+
+
 def start_game():
     """
     Game logic
@@ -94,28 +110,17 @@ Answer with y if like the movie, answer with n otherwise.
 Press ENTER/RETURN to continue.
 ----------------------------------------------------------------------\n"""
     )
-    movies = ia.get_top250_movies()
-    random_movies = get_random_movies(movies)
-    liked_genres = {}
-    for movie in random_movies:
-        if get_does_user_like_movie(movie):
-            print("* adding genres to your list, please wait...")
-            genres = get_genres_of_movie(movie)
-            for genre in genres:
-                liked_genres[genre] = liked_genres.get(genre, 0) + 1
-        print("")
+    random_movies = get_random_movies()
+    liked_genres = get_liked_genres_with_movies(random_movies)
     suggest_movies(liked_genres)
-
-    answer = input("\nDo you want to try again? (y/n): ")
-    if answer == "y":
-        start_game()
 
 
 def main():
-    """
-    Runs the program flow.
-    """
+    """Starts the game."""
     start_game()
+    answer = input("\nDo you want to try again? (y/n): ")
+    if answer == "y":
+        main()
 
 
 main()
