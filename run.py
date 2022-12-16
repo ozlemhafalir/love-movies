@@ -5,17 +5,22 @@ from imdb import Cinemagoer
 ia = Cinemagoer()
 
 
+class MovieBasicInfo:
+    def __init__(self, movie):
+        self.title = movie.data["title"]
+        self.year = movie.data["year"]
+
+
 def get_random_movies(list, count=20):
     random_indexes = random.sample(range(0, len(list)), count)
     return [list[index] for index in random_indexes]
 
 
 def get_does_user_like_movie(movie):
-    title = movie.data["title"]
-    year = movie.data["year"]
-    answer = input(f"[{year}] {title} \n")
+    movie_basic_info = MovieBasicInfo(movie)
+    answer = input(f"[{movie_basic_info.year}] {movie_basic_info.title} \n")
     while answer != "y" and answer != "n":
-        answer = input(f"Please answer with y or n. Do you like: [{year}] {title} \n")
+        answer = input(f"Please answer with y or n. Do you like: [{movie_basic_info.year}] {movie_basic_info.title} \n")
     return answer == "y"
 
 
@@ -39,7 +44,8 @@ def suggest_movies(liked_genres, liked_movies_count):
     top_genre_movies = ia.get_top50_movies_by_genres(top_genres_list)
     print("\nHere are some suggestions for you")
     for genre_movie in top_genre_movies[:10]:
-        print(genre_movie.data["title"])
+        movie_basic_info = MovieBasicInfo(genre_movie)
+        print(f"[{movie_basic_info.year}] {movie_basic_info.title}")
 
 
 def start_game():
