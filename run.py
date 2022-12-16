@@ -71,12 +71,12 @@ def start_game():
     random_movies = get_random_movies(movies)
     input(
         """
-        ----------------------------------------------------------------------
-        Welcome! You will be asked with [year] movie.
-        Answer with y if you know and like the movie, answer with n otherwise.
-        Press return to continue.
-        ----------------------------------------------------------------------
-        \n\n
+----------------------------------------------------------------------
+Welcome! You will be asked with [year] movie.
+Answer with y if you know and like the movie, answer with n otherwise.
+Press return to continue.
+----------------------------------------------------------------------
+\n\
         """
     )
     liked_movies_count = 0
