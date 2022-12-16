@@ -1,31 +1,31 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+# Love Movies
 
-Welcome ozlemhafalir,
+[Love Movies](https://love-movies-app.herokuapp.com/) is a Python console application that suggests users list of movies based on genres of their likings among the random top 250 IMDB movies.
 
-This is the Code Institute student template for deploying your third portfolio project, the Python command-line project. The last update to this file was: **August 17, 2021**
+## Features
+### Start Game
+![Start Game](https://raw.githubusercontent.com/ozlemhafalir/love-movies/main/assets/readme/start-game.png)
 
-## Reminders
+### Suggestions
+![Suggestions](https://raw.githubusercontent.com/ozlemhafalir/love-movies/main/assets/readme/suggestions.png)
 
-* Your code must be placed in the `run.py` file
-* Your dependencies must be placed in the `requirements.txt` file
-* Do not edit any of the other files or your code may not deploy properly
 
-## Creating the Heroku app
+## Deployment
+This application is deployed to Heroku, under: https://love-movies-app.herokuapp.com/
 
-When you create the app, you will need to add two buildpacks from the _Settings_ tab. The ordering is as follows:
+Using heroku/python and heroku/nodejs build packs.
 
-1. `heroku/python`
-2. `heroku/nodejs`
 
-You must then create a _Config Var_ called `PORT`. Set this to `8000`
+## Testing
 
-If you have credentials, such as in the Love Sandwiches project, you must create another _Config Var_ called `CREDS` and paste the JSON into the value field.
+✅ Program validates the user input.
 
-Connect your GitHub repository and deploy as normal.
+✅ Using flake8 for run.py no problem was detected
 
-## Constraints
+## Issues
 
-The deployment terminal is set to 80 columns by 24 rows. That means that each line of text needs to be 80 characters or less otherwise it will be wrapped onto a second line.
+Getting genre takes some time.
 
------
-Happy coding!
+## References
+* [Cinemagoer Homepage](https://cinemagoer.github.io/)
+* [Cinemagoer Github Repository](https://github.com/cinemagoer/cinemagoer)
