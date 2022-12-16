@@ -70,7 +70,14 @@ def start_game():
     movies = ia.get_top250_movies()
     random_movies = get_random_movies(movies)
     input(
-        "You will be asked with [year] movie. Answer with y if you know and like the movie, answer with n otherwise. Press return to continue\n"
+        """
+        ----------------------------------------------------------------------
+        Welcome! You will be asked with [year] movie.
+        Answer with y if you know and like the movie, answer with n otherwise.
+        Press return to continue.
+        ----------------------------------------------------------------------
+        \n\n
+        """
     )
     liked_movies_count = 0
     liked_genres = dict()
