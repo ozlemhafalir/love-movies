@@ -6,31 +6,46 @@ ia = Cinemagoer()
 
 
 class MovieBasicInfo:
+    """Class definition for movie"""
+
     def __init__(self, movie):
         self.title = movie.data["title"]
         self.year = movie.data["year"]
 
 
 def get_random_movies(list, count=20):
+    """
+    From a given list of movies, returns a random list.
+    Parameters
+    list: Source list
+    count: Number of random movies to return, default 20.
+    """
     random_indexes = random.sample(range(0, len(list)), count)
     return [list[index] for index in random_indexes]
 
 
 def get_does_user_like_movie(movie):
+    """Helper function to ask if user likes the movie, parse and return boolean value."""
     movie_basic_info = MovieBasicInfo(movie)
     answer = input(f"[{movie_basic_info.year}] {movie_basic_info.title} \n")
     while answer != "y" and answer != "n":
-        answer = input(f"Please answer with y or n. Do you like: [{movie_basic_info.year}] {movie_basic_info.title} \n")
+        answer = input(
+            f"Please answer with y or n. Do you like: [{movie_basic_info.year}] {movie_basic_info.title} \n"
+        )
     return answer == "y"
 
 
 def get_genres_of_movie(movie):
+    """Helper function to get genres of movie, by using Cinemagoer's get_movie function"""
     movie_info = ia.get_movie(movie.movieID)
     genres = movie_info["genres"]
     return genres
 
 
 def suggest_movies(liked_genres, liked_movies_count):
+    """
+    Gets the top movies with liked_genres using Cinemagoer library. And prints them to the console as suggestions.
+    """
     top_genres_dict = {
         k: v
         for k, v in sorted(liked_genres.items(), key=lambda item: item[1], reverse=True)
